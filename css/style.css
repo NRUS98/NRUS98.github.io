@@ -18,25 +18,20 @@ body {
 }
 h2 {
   font-family: "Amatic SC", cursive;
-  margin-bottom: 20px;
-
+  margin-bottom: 30px;
   color: #ffffff;
   font-size: 7rem;
 }
 
 button {
-  background-color: #ff0000fc;
+  background-color: transparent;
   border: solid 1px;
-  color: white;
-  margin-bottom: 3em;
-  font-size: 20px;
-  border-radius: 30px;
+  padding: 4px 12px;
+  border-radius: 4px;
   -webkit-transition: 0.5s 0.1s;
   transition: 0.5s 0.1s;
   cursor: pointer;
   vertical-align: middle;
-  outline: none;
-  width: 40%;
 }
 button:hover {
   background-color: #585858;
@@ -46,7 +41,7 @@ button:hover {
 .centerBox {
   position: absolute;
   left: 50%;
-  top: 47%;
+  top: 35%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
@@ -115,7 +110,7 @@ button:hover {
 
 .label {
   position: absolute;
-  color: rgb(0, 0, 0);
+  color: rgba(88, 88, 88, 0.5);
   bottom: -25px;
   left: 50%;
   -webkit-transform: translate(-50%);
@@ -131,16 +126,4 @@ i {
 
 i.fa-circle {
   color: #cc0000;
-}
-
-img {
-  width: 10%;
-  cursor: pointer;
-}
-img:hover {
-  transform: translate(0px, -5px);
-}
-
-p {
-  color: rgba(0, 0, 0, 0.966);
 }
