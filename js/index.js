@@ -27,9 +27,7 @@ var soundIndex = [
   14,
   15
 ];
-var notesData = [
-
-];
+var notesData = [];
 var keys = [
   { num: 1, key: 90, type: "white" },
   { num: 1.5, key: 83, type: "black" },
@@ -69,15 +67,72 @@ var vm = new Vue({
   el: "#app",
   data: {
     sounddata: soundpack,
-    notes: notesData,
+    master: "../Master.png",
     nowNoteId: 0,
     nextNoteId: 0,
     playingTime: 0,
     player: null,
     displayKeys: keys,
-    nowPressKey: -1
+    nowPressKey: -1,
+    notes: []
   },
   methods: {
+    sample: function() {
+      this.master = "../Veider.png";
+      this.notes = [
+        { num: 5, time: 50 / 1.3 },
+        { num: 5, time: 200 / 1.3 },
+        { num: 5, time: 350 / 1.3 },
+
+        { num: 2.5, time: 490 / 1.3 },
+        { num: 6.5, time: 610 / 1.3 },
+        { num: 5, time: 670 / 1.3 },
+
+        { num: 2.5, time: 800 / 1.3 },
+        { num: 6.5, time: 920 / 1.3 },
+        { num: 5, time: 980 / 1.3 },
+
+        { num: 9, time: 1190 / 1.3 },
+        { num: 9, time: 1340 / 1.3 },
+        { num: 9, time: 1490 / 1.3 },
+
+        { num: 9.5, time: 1640 / 1.3 },
+        { num: 6.5, time: 1740 / 1.3 },
+        { num: 4.5, time: 1800 / 1.3 },
+
+        { num: 2.5, time: 1930 / 1.3 },
+        { num: 6.5, time: 2030 / 1.3 },
+        { num: 5, time: 2100 / 1.3 }
+      ];
+      this.nowNoteId = 0;
+      this.playingTime = 0;
+      this.nextNoteId = 0;
+      var vobj = this;
+      this.player = setInterval(function() {
+        if (vobj.playingTime >= vobj.notes[vobj.nextNoteId].time) {
+          vobj.playnext(1);
+          vobj.nextNoteId++;
+        }
+        vobj.playingTime++;
+      }, 2);
+    },
+
+    playnext: function(volume) {
+      var playNote = this.notes[this.nowNoteId].num;
+
+      this.playnote(playNote, volume);
+      this.nowNoteId += 1;
+
+      if (this.nowNoteId >= this.notes.length) {
+        clearInterval(this.player);
+        this.nowNoteId = 0;
+        this.playingTime = 0;
+        this.nextNoteId = 0;
+        this.notes = [];
+        this.master = "../Master.png";
+      }
+    },
+
     playnote: function(id, volume) {
       if (id > 0) {
         var audioObj = $("audio[data-num='" + id + "']")[0];
@@ -88,8 +143,6 @@ var vm = new Vue({
     },
 
     getCurrentHighlight: function(id, skey) {
-      console.log(id);
-
       if (this.nowPressKey == skey) {
         return true;
       }
@@ -127,6 +180,7 @@ $(window).keydown(function(e) {
   for (var i = 0; i < vm.displayKeys.length; i++) {
     if (key == vm.displayKeys[i].key) {
       vm.addnote(vm.displayKeys[i].num);
+      console.log(vm.displayKeys[i].num);
     }
   }
 });

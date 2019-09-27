@@ -14,13 +14,22 @@
 <body>
 
   <div id="app">
+
     <div class="audioplayer" v-for="s in sounddata">
       <audio v-bind:data-num="s.number">
         <source v-bind:src="s.url" />
       </audio>
     </div>
     <div class="centerBox">
-      <h2>Hi, Godel Technologies Europe :)</h2>
+
+      <h2>Hi, Godel Technologies Europe:)</h2>
+      <div>
+        <img v-on:click="sample()" v-bind:src="master" alt="">
+        <p>CLICK ON ME</p>
+      </div>
+
+
+      <br />
       <div class="keyboard">
         <div class="pianokey" v-for="s in displayKeys">
           <div class="white" v-if="s.type == 'white'" v-on:click="addnote(s.num)"
@@ -33,6 +42,7 @@
           </div>
         </div>
       </div><br />
+
 
     </div>
   </div>
