@@ -25,7 +25,8 @@
       <h2>Hi, Godel Technologies Europe:)</h2>
       <div>
         <img v-on:click="sample()" :src="'./'+master+'.png'">
-        <p>CLICK ON ME</p>
+        <p v-if="master==='Master'">CLICK ON ME</p>
+        <p v-else>May the Force be with you</p>
       </div>
 
 
